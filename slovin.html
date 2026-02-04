@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Perhitungan Jumlah Sampel - Rumus Slovin</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #eef2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1e8449;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>👥 Perhitungan Jumlah Sampel (Slovin)</h2>
+
+    <label>Jumlah Populasi (N)</label>
+    <input type="number" id="populasi" placeholder="Contoh: 200">
+
+    <label>Tingkat Kesalahan (e)</label>
+    <input type="number" step="0.01" id="error" placeholder="Contoh: 0.1">
+
+    <button onclick="hitungSlovin()">Hitung Jumlah Sampel</button>
+
+    <div class="hasil" id="output"></div>
+</div>
+
+<script>
+function hitungSlovin() {
+    let N = parseFloat(document.getElementById("populasi").value);
+    let e = parseFloat(document.getElementById("error").value);
+
+    if (N <= 0 || e <= 0) {
+        alert("Masukkan nilai populasi dan tingkat kesalahan yang benar!");
+        return;
+    }
+
+    let n = N / (1 + N * Math.pow(e, 2));
+
+    document.getElementById("output").innerHTML =
+        `<b>Hasil Perhitungan:</b><br><br>
+         Jumlah Sampel (n) = <b>${Math.round(n)}</b>`;
+}
+</script>
+
+</body>
+</html>
