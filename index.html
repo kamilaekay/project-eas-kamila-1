@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Analisis Regresi Linier Sederhana</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #eef2f5;
+            padding: 20px;
+        }
+
+        .box {
+            max-width: 700px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>📈 Analisis Regresi Linier Sederhana</h2>
+
+    <label>Masukkan Data X (pisahkan dengan koma)</label>
+    <input type="text" id="x" placeholder="Contoh: 1,2,3,4,5">
+
+    <label>Masukkan Data Y (pisahkan dengan koma)</label>
+    <input type="text" id="y" placeholder="Contoh: 2,4,5,4,6">
+
+    <button onclick="hitungRegresi()">Hitung Regresi</button>
+
+    <div class="hasil" id="output"></div>
+</div>
+
+<script>
+function hitungRegresi() {
+    let X = document.getElementById("x").value.split(",").map(Number);
+    let Y = document.getElementById("y").value.split(",").map(Number);
+
+    if (X.length !== Y.length || X.length === 0) {
+        alert("Jumlah data X dan Y harus sama!");
+        return;
+    }
+
+    let n = X.length;
+    let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+
+    for (let i = 0; i < n; i++) {
+        sumX += X[i];
+        sumY += Y[i];
+        sumXY += X[i] * Y[i];
+        sumX2 += X[i] * X[i];
+    }
+
+    let b = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    let a = (sumY - b * sumX) / n;
+
+    document.getElementById("output").innerHTML =
+        `<b>Hasil Perhitungan:</b><br><br>
+         a (Konstanta) = ${a.toFixed(2)}<br>
+         b (Koefisien Regresi) = ${b.toFixed(2)}<br><br>
+         <b>Persamaan Regresi:</b><br>
+         Y = ${a.toFixed(2)} + ${b.toFixed(2)}X`;
+}
+</script>
+
+</body>
+</html>
